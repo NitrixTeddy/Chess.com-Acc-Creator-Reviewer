@@ -9,6 +9,16 @@ from random import randint
 import sqlite3
 from sys import exit
 
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS accounts (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT NOT NULL,
+    password TEXT NOT NULL,
+    used INTEGER NOT NULL DEFAULT 0
+)
+""")
+conn.commit()
+
 while True:
 
     conn = sqlite3.connect('accounts.db')
@@ -106,5 +116,6 @@ while True:
 
     print("Done")
     print(f"Account created: {randname} | {randpass}")
+
 
     driver.quit()
