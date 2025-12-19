@@ -9,20 +9,20 @@ from random import randint
 import sqlite3
 from sys import exit
 
-cursor.execute("""
-CREATE TABLE IF NOT EXISTS accounts (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    username TEXT NOT NULL,
-    password TEXT NOT NULL,
-    used INTEGER NOT NULL DEFAULT 0
-)
-""")
-conn.commit()
-
 while True:
 
     conn = sqlite3.connect('accounts.db')
     cursor = conn.cursor()
+
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS accounts (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        username TEXT NOT NULL,
+        password TEXT NOT NULL,
+        used INTEGER NOT NULL DEFAULT 0
+    )
+    """)
+    conn.commit()
 
     opts = Options()
     opts.add_argument("--disable-blink-features=AutomationControlled")
@@ -119,3 +119,4 @@ while True:
 
 
     driver.quit()
+
